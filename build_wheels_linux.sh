@@ -15,14 +15,14 @@ mkdir -p $WHEELHOUSE
 
 # tag on github and revision number. Make sure that they are there.
 BRANCH=$(cat ./BRANCH)
-VERSION="3.2dev$(date +%Y%m%d)"
+VERSION="4.0.dev$(date +%Y%m%d)"
 
 # Create a test script and upload.
 TESTFILE=/tmp/test.py
 cat <<EOF >$TESTFILE
 import moose
 import moose.utils as mu
-print( moose.__version__ )
+print( moose.version() )
 moose.reinit()
 moose.start( 1 )
 EOF
@@ -45,7 +45,7 @@ if [ -d $MOOSE_SOURCE_DIR ]; then
   cd $MOOSE_SOURCE_DIR && git checkout $BRANCH && git pull origin $BRANCH
   rm -rf dist
 else
-  git clone https://github.com/dilawar/moose-core $MOOSE_SOURCE_DIR \
+  git clone https://github.com/bhallalab/moose-core $MOOSE_SOURCE_DIR \
     --depth 1 --branch $BRANCH
 fi
 
@@ -54,9 +54,9 @@ GSL_STATIC_LIBS="/usr/local/lib/libgsl.a;/usr/local/lib/libgslcblas.a"
 CMAKE=/usr/bin/cmake3
 
 # Build wheels here.
-PY27=$(ls /opt/python/cp27-cp27m/bin/python?.?)
+#PY27=$(ls /opt/python/cp27-cp27m/bin/python?.?)
 PY35=$(ls /opt/python/cp35-cp35m/bin/python?.?)
-PY36=$(ls /opt/python/cp36-cp36m/bin/python?.?)
+#PY36=$(ls /opt/python/cp36-cp36m/bin/python?.?)
 PY37=$(ls /opt/python/cp37-cp37m/bin/python?.?)
 PY38=$(ls /opt/python/cp38-cp38/bin/python?.?)
 
